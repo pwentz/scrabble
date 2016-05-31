@@ -1,7 +1,10 @@
 class Player
-  attr_reader :score_sheet
-
+  attr_accessor :score_sheet
+  attr_reader :word_input
+  def initialize
+    @score_sheet = Array.new
+  end
   def input
-    gets.chomp
+    word_input = gets.chomp
   end
 end

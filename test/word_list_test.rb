@@ -8,15 +8,16 @@ require 'pry'
 
 class WordListTest < Minitest::Test
   def setup
-    @player1 = Player.new(1)
-    @player2 = Player.new(2)
-    @scrabble = Scrabble.new
     @word_list = WordList.new
   end
 
-  def test_can_track_one_score
-    @word_list.assemble_score_sheet("hamster")
+  def test_tracks_score_by_player
+    player = Player.new
+    @word_list.assemble_score_sheet(player,"hamster")
 
-    assert_equal 12, @word_list.score_sheet["hamster"]
+    assert_instance_of Array, player.score_sheet
+    assert_equal "hamster", player.score_sheet.join.split(",").first
+    assert_equal "12", player.score_sheet.join.split(",").last
   end
+
 end

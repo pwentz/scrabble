@@ -1,5 +1,16 @@
 require_relative '../lib/word_finder'
+require_relative '../lib/player'
+require_relative '../lib/game_reader'
+require 'pry'
+
 class Scrabble
+  def play(word)
+    reader = GameReader.new
+    player = Player.new
+    reader.save_score(player, word)
+    puts reader.grab_score(player)
+  end
+
   def score(word)
     if word == nil || word.empty?
       0
@@ -36,6 +47,4 @@ class Scrabble
       score + point_values[letter.upcase]
     end
   end
-
-
 end
