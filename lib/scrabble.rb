@@ -1,6 +1,13 @@
+require_relative '../lib/word_finder'
 class Scrabble
   def score(word)
-    0
+    if word == nil || word.empty?
+      0
+    elsif word.length < 2
+      point_values[word.upcase]
+    else
+      word_confirmation(word)
+    end
   end
 
   def point_values
@@ -14,4 +21,21 @@ class Scrabble
       "Y"=>4, "Z"=>10
     }
   end
+
+  def word_confirmation(word)
+    finder = WordFinder.new
+    if finder.is_a_word?(word)
+      tally(word)
+    else
+      score(nil)
+    end
+  end
+
+  def tally(word)
+    word.chars.reduce(0) do |score, letter|
+      score + point_values[letter.upcase]
+    end
+  end
+
+
 end
