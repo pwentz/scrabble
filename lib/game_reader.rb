@@ -3,11 +3,7 @@ require_relative '../lib/word_list'
 
 
 class GameReader
-  def fetch_input
-    word = player.input
-    retrieve_score(word)
-  end
-  
+
   def save_score(player, word)
     list = WordList.new
     list.assemble_score_sheet(player, word)
